@@ -1,0 +1,43 @@
+<%
+   if @item == nil
+     @item = Item.find(params[:id])
+   end
+%>
+
+<%= form_for([@item, @translation]) do |f| %>
+  <% if @translation != nil && @translation.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@translation.errors.count, "error") %> prohibited this translation from being saved:</h2>
+
+      <ul>
+      <% @translation.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :item_id %>
+    <%= @translation.item_id %>
+  </div>
+  <div class="field">
+    <%= f.label :language_id %><br>
+    <%= f.label :language_id %>
+  </div>
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.label :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :value %><br>
+    <%= f.text_field :value %>
+  </div>
+  <div class="field">
+    <%= f.label :score %>
+    <%= @translation.score %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

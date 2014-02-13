@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @project.user_id %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @project.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @project.description %>
+</p>
+
+<%= render @project.items %>
+
+<%= form_for(@project, url: upload_items_project_path(@project), method: :put, remote: true) do |f| %>
+    <%= f.file_field :new_items %>
+    <%= f.submit "Add new items" %>
+<% end %>
+
+<%= link_to 'Add item', new_project_item_path(@project) %> |
+<%= link_to 'Edit', edit_project_path(@project) %> |
+<%= link_to 'Back', projects_path %>

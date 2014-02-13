@@ -1,4 +1,32 @@
 TranslateCommunity::Application.routes.draw do
+
+  # http://weblog.jamisbuck.org/2007/2/5/nesting-resources
+
+  root to: 'projects#index'
+
+  resources :users do
+    resources :projects#, :name_prefix => "user_"
+  end
+
+  resources :projects do
+    resources :items#, :name_prefix => "project_"
+    put :upload_items, on: :member
+  end
+
+  resources :items, only: [:show, :edit, :update, :destroy] do
+    resources :translations#, :name_prefix => "item_"
+  end
+
+  resources :translations
+
+  # resources :users do
+  #   resources :projects do
+  #     resources :items do
+  #       resources :translations
+  #     end
+  #   end
+  # end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
