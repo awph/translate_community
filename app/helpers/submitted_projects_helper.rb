@@ -1,0 +1,2 @@
+module SubmittedProjectsHelper
+end
