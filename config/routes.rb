@@ -1,17 +1,13 @@
 TranslateCommunity::Application.routes.draw do
 
   devise_for :users
-  get "profile_page/index"
-  get "submitted_translations/index"
-  get "submitted_projects/index"
-  get "submitted_projects/submitted_projects"
-  get "submitted_translations/translations"
-  get "profile_page/profile"
+
   # http://weblog.jamisbuck.org/2007/2/5/nesting-resources
 
   root to: 'projects#index'
 
   resources :users do
+    get :submitted_translations, on: :member
     resources :projects#, :name_prefix => "user_"
   end
 
@@ -25,10 +21,7 @@ TranslateCommunity::Application.routes.draw do
   end
 
   resources :translations
-  
-  resources :profile_page
-  resources :submitted_projects
-  resources :submitted_translations
+
   # resources :users do
   #   resources :projects do
   #     resources :items do
