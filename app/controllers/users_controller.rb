@@ -62,11 +62,10 @@ class UsersController < ApplicationController
   end
   
   def submitted_translations
-    @translations = Translation.includes(:item).where(user_id: params[:id])
+    @translations = Translation.where(user_id: params[:id])
     
-    render json: @translations
+    render "translations/index"
   end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user

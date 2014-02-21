@@ -31,5 +31,6 @@
 </table>
 
 <br>
-
+<% if @item != nil %>
 <%= link_to 'New Translation', new_item_translation_path(@item) %>
+<% end %>
