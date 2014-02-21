@@ -3,8 +3,8 @@
 	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Profile <b class="caret"></b></a>
     <ul class="dropdown-menu">
 		<li><%= link_to 'Submitted translations', submitted_translations_path('submitted_translations')%></li>
-		<li><%= link_to 'Your Projects',  submitted_projects_path('submitted_projects') %></li>
-		<li><%= link_to 'Profile information',  profile_page_path('profile_page') %></li>
+		<li><%= link_to 'Your Projects',  user_projects_path('1') %></li>
+		<li><%= link_to 'Profile information',  user_path('1') %></li>
     </ul>
     <li><%= link_to 'Sign up',  @inx %></li>
     <li><%= link_to 'Sign in', @blablabla %></li>
