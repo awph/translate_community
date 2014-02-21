@@ -11,6 +11,7 @@ TranslateCommunity::Application.routes.draw do
   root to: 'projects#index'
 
   resources :users do
+    get :submitted_translations, on: :member
     resources :projects#, :name_prefix => "user_"
   end
 
