@@ -1,5 +1,6 @@
 TranslateCommunity::Application.routes.draw do
 
+  devise_for :users
   get "profile_page/index"
   get "submitted_translations/index"
   get "submitted_projects/index"

@@ -37,6 +37,9 @@ group :development do
   gem 'rails_layout'
 end
 
+# Used for login management
+gem 'devise'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
