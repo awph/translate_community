@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :upload_items, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :upload_items, :destroy, :upload_items]
 
   # GET /projects
   # GET /projects.json
@@ -53,7 +53,13 @@ class ProjectsController < ApplicationController
 
   def upload_items
     uploaded_io = params[:project][:new_items]
-    p uploaded_io
+    p uploaded_io.open
+    @project
+    p formats
+    respond_to do |format|
+      #format.html { redirect_to @project }
+      format.js
+    end
   end
 
   # DELETE /projects/1
