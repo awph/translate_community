@@ -1,3 +1,5 @@
+require 'nokogiri'
+
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :upload_items, :destroy, :upload_items]
 
@@ -53,12 +55,44 @@ class ProjectsController < ApplicationController
 
   def upload_items
     uploaded_io = params[:project][:new_items]
-    p uploaded_io.open
-    @project
+    contents = uploaded_io.read
+    items = case uploaded_io.content_type
+              when 'text/xml' then extract_items_xml(contents)
+              when 'application/octet-stream' then extract_items_strings(contents)
+            end
+    p '----------'
+    p '----------'
+    p items
+    p '----------'
+    p '----------'
     p formats
+    p uploaded_io.content_type
     respond_to do |format|
       #format.html { redirect_to @project }
       format.js
+    end
+  end
+
+  # Extract and return the items of a xml file used in Android development
+  # The "string" nodes contains all info (name and value)
+  # Return a hash of all items
+  # https://github.com/sparklemotion/nokogiri/wiki/Cheat-sheet
+  def extract_items_xml(xml_content)
+    xml = Nokogiri::XML.parse(xml_content)
+    strings = xml.xpath('//string')
+    items = Hash.new
+    strings.each do |string|
+      name = string.attributes['name'].value
+      value = string.children.text
+      items[name] = value
+    end
+    return items
+  end
+
+  # iOS
+  def extract_items_strings(contents)
+    contents.split("\n").each do |line|
+      p line.tr('\r', '')
     end
   end
 
