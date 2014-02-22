@@ -86,14 +86,21 @@ class ProjectsController < ApplicationController
       value = string.children.text
       items[name] = value
     end
-    return items
+    items
   end
 
   # iOS
   def extract_items_strings(contents)
+    items = Hash.new
     contents.split("\n").each do |line|
-      p line.tr('\r', '')
+      match = line.match(/^"(.+)"[ ]*[=][ ]*"(.+)";$/)
+      if match
+        name = match[1]
+        value = match[2]
+        items[name] = value
+      end
     end
+    items
   end
 
   # DELETE /projects/1
