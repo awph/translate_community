@@ -57,18 +57,26 @@ class ProjectsController < ApplicationController
     uploaded_io = params[:project][:new_items]
     contents = uploaded_io.read
     items = case uploaded_io.content_type
-              when 'text/xml' then extract_items_xml(contents)
-              when 'application/octet-stream' then extract_items_strings(contents)
+              when 'text/xml' then extract_items_xml_android(contents)
+              when 'application/octet-stream' then extract_items_strings_ios(contents)
             end
-    p '----------'
-    p '----------'
-    p items
-    p '----------'
-    p '----------'
+    items.each do |name, value|
+      item = Item.where(project_id: @project.id, key: name).take
+      if !item
+        item = Item.create(project_id: @project.id, key: name)
+      end
+
+      translation = Translation.where(item_id: item.id, language_id: 1, value: value)
+      if translation
+        Translation.create(item_id: item.id, language_id: 1, user_id: 1, value: value, score: 0) # TODO: parent
+      else
+        Translation.create(item_id: item.id, language_id: 1, user_id: 1, value: value, score: 0)
+      end
+    end
     p formats
     p uploaded_io.content_type
     respond_to do |format|
-      #format.html { redirect_to @project }
+      format.html { redirect_to @project }
       format.js
     end
   end
@@ -77,7 +85,7 @@ class ProjectsController < ApplicationController
   # The "string" nodes contains all info (name and value)
   # Return a hash of all items
   # https://github.com/sparklemotion/nokogiri/wiki/Cheat-sheet
-  def extract_items_xml(xml_content)
+  def extract_items_xml_android(xml_content)
     xml = Nokogiri::XML.parse(xml_content)
     strings = xml.xpath('//string')
     items = Hash.new
@@ -90,7 +98,7 @@ class ProjectsController < ApplicationController
   end
 
   # iOS
-  def extract_items_strings(contents)
+  def extract_items_strings_ios(contents)
     items = Hash.new
     contents.split("\n").each do |line|
       match = line.match(/^"(.+)"[ ]*[=][ ]*"(.+)";$/)
