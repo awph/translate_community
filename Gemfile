@@ -43,7 +43,11 @@ gem 'devise'
 gem 'nokogiri'
 
 gem 'foundation-rails'
-gem 'compass'
+
+gem 'compass-rails'
+group :assets do
+  # Add any compass extensions here
+end
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

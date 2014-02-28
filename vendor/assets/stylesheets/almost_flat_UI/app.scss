@@ -1,5 +1,5 @@
 // Global Foundation Settings
- @import "settings";
+@import "settings";
 
 // Comment out this import if you are customizing you imports below
 //@import "foundation";
@@ -8,6 +8,10 @@
 // and uncommenting what you want below. You must uncomment the following if customizing
 
 
+@import "compass/css3/box-shadow";
+@import "compass/css3/images";
+@import "compass/css3/transition";
+@import "compass/css3/opacity";
 
 
 
