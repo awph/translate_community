@@ -26,8 +26,15 @@ class Translation < ActiveRecord::Base
 
   private
 
-  def vote(is_up)
-    UserTranslationsScore.create(user_id: 1, translation_id: id, up: is_up)
+  def vote(up)
+    user_translations_score = UserTranslationsScore.where(user_id: 1, translation_id: id).take
+    p user_translations_score
+    if user_translations_score
+      user_translations_score.up = up
+      user_translations_score.save
+    else
+      UserTranslationsScore.create(user_id: 1, translation_id: id, up: up)
+    end
   end
 
 end

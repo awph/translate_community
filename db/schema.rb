@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140301144708) do
+ActiveRecord::Schema.define(version: 20140301154728) do
 
   create_table "items", force: true do |t|
     t.integer  "project_id"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20140301144708) do
   end
 
   add_index "user_translations_scores", ["translation_id"], name: "index_user_translations_scores_on_translation_id", using: :btree
+  add_index "user_translations_scores", ["user_id", "translation_id"], name: "index_user_translations_scores_on_user_id_and_translation_id", unique: true, using: :btree
   add_index "user_translations_scores", ["user_id"], name: "index_user_translations_scores_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
