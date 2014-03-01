@@ -6,6 +6,10 @@
 				<td>
     				<h3><%= translation.value %></h3>
     				<p>Score: <%= translation.score %></p>
+                    <p>
+                      <%= link_to 'Up', vote_up_translation_path(translation), method: :put, remote: true %> |
+                      <%= link_to 'Down', vote_down_translation_path(translation), method: :put, remote: true %>
+                    </p>
     			</td>
     		</tr>
     	</tbody>

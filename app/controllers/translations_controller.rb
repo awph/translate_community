@@ -1,5 +1,5 @@
 class TranslationsController < ApplicationController
-  before_action :set_translation, only: [:show, :edit, :update, :destroy]
+  before_action :set_translation, only: [:show, :edit, :update, :destroy, :vote_up, :vote_down]
   before_action :get_item
 
   # GET /translations
@@ -61,6 +61,20 @@ class TranslationsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to translations_url }
       format.json { head :no_content }
+    end
+  end
+
+  def vote_up
+    @translation.vote_up
+    respond_to do |format|
+      format.js
+    end
+  end
+
+  def vote_down
+    @translation.vote_down
+    respond_to do |format|
+      format.js
     end
   end
 

@@ -20,7 +20,10 @@ TranslateCommunity::Application.routes.draw do
     resources :translations#, :name_prefix => "item_"
   end
 
-  resources :translations
+  resources :translations do
+    put :vote_up, on: :member
+    put :vote_down, on: :member
+  end
 
   # resources :users do
   #   resources :projects do
