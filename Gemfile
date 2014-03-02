@@ -43,6 +43,9 @@ gem 'devise'
 # Used for extract items of XML files (Android)
 gem 'nokogiri'
 
+# Used for create Zip file
+gem 'rubyzip'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 

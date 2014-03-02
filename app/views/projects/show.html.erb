@@ -24,5 +24,7 @@
 <% end %>
 
 <%= link_to 'Add item', new_project_item_path(@project) %> |
+<%= link_to 'Download iOS', download_ios_project_path(@project) %> |
+<%= link_to 'Download Android', download_android_project_path(@project) %> |
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>

@@ -14,6 +14,8 @@ TranslateCommunity::Application.routes.draw do
   resources :projects do
     resources :items#, :name_prefix => "project_"
     put :upload_items, on: :member
+    get :download_android, on: :member
+    get :download_ios, on: :member
   end
 
   resources :items, only: [:show, :edit, :update, :destroy] do
