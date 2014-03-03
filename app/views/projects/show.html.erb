@@ -1,16 +1,17 @@
 <p id="notice"><%= notice %></p>
-
+<div style="margin:10px">
+<!--
 <p>
   <strong>User:</strong>
   <%= @project.user_id %>
 </p>
-
+-->
 <p>
-  <strong>Name:</strong>
-  <%= @project.name %>
+  <h1>Project: <%= @project.name %></h1>
+  
 </p>
 
-<p>
+<p style="margin: 10px">
   <strong>Description:</strong>
   <%= @project.description %>
 </p>
@@ -20,9 +21,13 @@
 <%= form_for(@project, url: upload_items_project_path(@project), method: :put, remote: true) do |f| %>
     <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
     <%= f.file_field :new_items %>
-    <%= f.submit "Add new items", :class => 'button primary-dark'  %>
 <% end %>
 
-<%= link_to 'Add item', new_project_item_path(@project) %> |
-<%= link_to 'Edit', edit_project_path(@project) %> |
-<%= link_to 'Back', projects_path %>
+<%= button_to "Add item", new_project_item_path(@project), :class => "button inverse-dark tiny", :method => :get %>
+</div>
+<table>
+	<tr>
+		<td><%= button_to "Edit", edit_project_path(@project), :class => "button inverse-dark tiny", :method => :get %></td>
+		<td><%= button_to "Back", project_path, :class => "button inverse-dark tiny", :method => :get %></td>
+	</tr>
+</table>

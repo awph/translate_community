@@ -1,5 +1,8 @@
 <%= div_for item do %>
-<h2><%= item.key %></h2>
-    <%= render item.translations %>
-    <%# render 'translations/form' %>
+<div class= "panel" style= "margin: 10px" >
+	<td><h2><%= item.key %></h2></td>
+	<%= render item.translations %>
+	<%# render 'translations/form' %>
+
+</div>
 <% end %>

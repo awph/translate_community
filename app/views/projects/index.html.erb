@@ -1,31 +1,28 @@
-<h1>Listing projects</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Name</th>
-      <th>Description</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
+<div style = "margin: 10px">
+	<h1>Project listing</h1>
 
-  <tbody>
-    <% @projects.each do |project| %>
-      <tr>
-        <td><%= project.user_id %></td>
-        <td><%= project.name %></td>
-        <td><%= project.description %></td>
-        <td><%= link_to 'Show', project %></td>
-        <td><%= link_to 'Edit', edit_project_path(project) %></td>
-        <td><%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
+  
+   	<% @projects.each do |project| %>
+    	<div class= "panel" style= "margin: 10px" >
+        	<span class="label"><%= project.user_id %></span>
+        	<span class="label"><%= project.name %></span>
+        	<div style="margin: 10px">
+        		<%= project.description %>
+        	</div>
+        	<div>
+        		<%= link_to 'Show', project %>
+        		<%= link_to 'Edit', edit_project_path(project) %>
+        		<%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %>
+        	</div>
+    	</div>
+  	<% end %>
+  
+</div>
 <br>
 
-<%= link_to 'New Project', new_project_path %>
+<div style = "margin: 20px">
+	<%= button_to "Create new project", new_project_path, :class => "button inverse-dark", :method => :get %>
+</div>
+
