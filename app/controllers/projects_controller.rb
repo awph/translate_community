@@ -1,7 +1,8 @@
 require 'nokogiri'
+require 'zip'
 
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :upload_items, :destroy, :upload_items]
+  before_action :set_project, only: [:show, :edit, :update, :upload_items, :destroy, :upload_items, :download_android, :download_ios]
 
   # GET /projects
   # GET /projects.json
@@ -111,6 +112,95 @@ class ProjectsController < ApplicationController
     items
   end
 
+  def fetch_translations
+    translations = Hash.new
+    @project.items.each do |item|
+      item.translations.each do |translation|
+        translations[translation.language_id] = Hash.new if translations[translation.language_id].nil?
+        translations[translation.language_id][item.key] = Hash.new if translations[translation.language_id][item.key].nil?
+        score = translations[translation.language_id][item.key][:score]
+        if score.nil? or score < translation.score
+          translations[translation.language_id][item.key][:score] = translation.score
+          translations[translation.language_id][item.key][:value] = translation.value
+        end
+      end
+    end
+    translations
+  end
+
+  def create_files(translations)
+    translations.each do |language, translation|
+      translations[language][:file] = Tempfile.new(language.to_s)
+    end
+    translations
+  end
+
+  def fill_file_android(language, translations)
+    translations[:filename] = "values-" + language.to_s + "/strings.xml"
+
+  end
+
+  def fill_file_ios(language, translations)
+    translations[:filename] = language.to_s + ".lproj/" + "Localizable.strings"
+    p translations
+    file = translations[:file]
+
+    # Header
+    file.puts "/*"
+    file.puts "   Localizable.strings"
+    file.puts "   " + @project.name
+    file.puts ""
+    file.puts "   Created on Translate Community on " + Time.new.strftime("%d.%m.%y")
+    file.puts "*/"
+    file.puts ""
+
+    # Content
+    translations.each do |key, value|
+      unless key == :file or key == :filename
+          file.puts "\"" + key + "\" = \"" + value[:value] + "\";"
+      end
+    end
+
+    file.close
+  end
+
+  def create_zip(translations)
+    zip_file_path = Dir::tmpdir + "/" + Dir::Tmpname.make_tmpname([@project.name, '.zip'], nil)
+
+    Zip::File.open(zip_file_path, Zip::File::CREATE) do |zipfile|
+      translations.each do |language, translation|
+        zipfile.add(translation[:filename], translation[:file].path)
+      end
+    end
+
+    zip_file_path
+  end
+
+  def download(type)
+    translations = fetch_translations
+    translations = create_files(translations)
+    translations.each do |language, translation|
+      case type
+        when :ios
+          fill_file_ios(language, translation)
+        when :android
+          fill_file_android(language, translation)
+      end
+    end
+
+    zip_file_path = create_zip(translations)
+
+    send_file zip_file_path, :type => 'application/zip', :disposition => 'attachment', :filename => @project.name + ".zip"
+  end
+
+  def download_android
+    download(:android)
+  end
+
+  def download_ios
+    download(:ios)
+  end
+
   # DELETE /projects/1
   # DELETE /projects/1.json
   def destroy
@@ -124,7 +214,7 @@ class ProjectsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
-      @project = Project.find(params[:id])
+      @project = Project.includes(:items => :translations).find(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

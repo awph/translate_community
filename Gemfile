@@ -48,6 +48,9 @@ gem 'compass-rails'
 group :assets do
   # Add any compass extensions here
 end
+=======
+# Used for create Zip file
+gem 'rubyzip'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

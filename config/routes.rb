@@ -6,7 +6,7 @@ TranslateCommunity::Application.routes.draw do
 
   root to: 'projects#index'
 
-  resources :users do
+  resources :users, only: [:index, :show] do
     get :submitted_translations, on: :member
     resources :projects#, :name_prefix => "user_"
   end
@@ -14,13 +14,18 @@ TranslateCommunity::Application.routes.draw do
   resources :projects do
     resources :items#, :name_prefix => "project_"
     put :upload_items, on: :member
+    get :download_android, on: :member
+    get :download_ios, on: :member
   end
 
   resources :items, only: [:show, :edit, :update, :destroy] do
     resources :translations#, :name_prefix => "item_"
   end
 
-  resources :translations
+  resources :translations do
+    put :vote_up, on: :member
+    put :vote_down, on: :member
+  end
 
   # resources :users do
   #   resources :projects do
