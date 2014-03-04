@@ -48,7 +48,7 @@ gem 'compass-rails'
 group :assets do
   # Add any compass extensions here
 end
-=======
+
 # Used for create Zip file
 gem 'rubyzip'
 
