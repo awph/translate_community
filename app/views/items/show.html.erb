@@ -1,14 +1,24 @@
 <p id="notice"><%= notice %></p>
+<div>
+	<p>
+  		<strong>Project:</strong>
+  		<%= @item.project_id %>
+  		<br>
+  		<strong>Project Name:</strong>
+  		<%= @item.project.name %>
+	</p>
 
-<p>
-  <strong>Project:</strong>
-  <%= @item.project_id %>
-</p>
+	<p>
+  		<strong>Key:</strong>
+  		<%= @item.key %>
+	</p>
+	<%= render @item.translations %>
 
-<p>
-  <strong>Key:</strong>
-  <%= @item.key %>
-</p>
 
-<%= link_to 'Edit', edit_item_path(@item) %> |
-<%= link_to 'Back', project_items_path(@project) %>
+<table>
+	<tr>
+		<td><%= button_to "Edit", edit_item_path(@item), :class => "button inverse-dark tiny", :method => :get %></td>
+		<td><%= button_to "Back", project_items_path(@project), :class => "button inverse-dark tiny", :method => :get %></td>
+	</tr>
+</table>
+</div>

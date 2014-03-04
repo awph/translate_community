@@ -1,10 +1,18 @@
 <p id="notice"><%= notice %></p>
 
-<p>
+<div style = "margin:10px">
+<p style = "margin: 10px">
   <strong>Name:</strong>
   <%= @user.name %>
 </p>
 
 <%= render @user.projects %>
 
-<%= link_to 'Back', users_path %>
+<table>
+	<tr>
+		<td><%= button_to "Edit user", edit_user_password_path, :class => "button inverse-dark tiny", :method => :get %></td>
+		<td><%= button_to "Back", users_path, :class => "button inverse-dark tiny", :method => :get %></td>
+	</tr>
+</table>
+
+</div>

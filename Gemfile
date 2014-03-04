@@ -32,7 +32,6 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-gem 'bootstrap-sass'
 group :development do
   gem 'rails_layout'
 end
@@ -42,6 +41,13 @@ gem 'devise'
 
 # Used for extract items of XML files (Android)
 gem 'nokogiri'
+
+gem 'foundation-rails'
+
+gem 'compass-rails'
+group :assets do
+  # Add any compass extensions here
+end
 
 # Used for create Zip file
 gem 'rubyzip'

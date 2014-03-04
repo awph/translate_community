@@ -1,4 +1,8 @@
 <%= div_for project do %>
-    <h2><%= link_to project.name, project %></h2>
-    <p>Description: <%= project.description %></p>
+	<div class= "panel" style= "margin: 10px" >
+    	<h2><%= link_to project.name, project %></h2>
+    	<div style="margin:15px">
+    		<%= project.description %>
+    	</div>
+    </div>
 <% end %>
