@@ -1,6 +1,6 @@
 class TranslationsController < ApplicationController
   before_action :set_translation, only: [:show, :edit, :update, :destroy, :vote_up, :vote_down]
-  before_action :get_item
+  before_action :get_item, except: [:index]
 
   # GET /translations
   # GET /translations.json
@@ -27,7 +27,7 @@ class TranslationsController < ApplicationController
   def create
     @translation = Translation.new(translation_params)
     @translation.item_id = @item.id
-    @translation.score = 0
+    #@translation.score = 0
 
     respond_to do |format|
       if @translation.save

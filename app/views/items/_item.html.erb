@@ -1,7 +1,8 @@
 <%= div_for item do %>
 <div class= "panel" style= "margin: 10px" >
-	<td><h2><%= item.key %></h2></td>
+	<h2><%= item.key %></h2>
+	<div><%= button_to "offer translation", new_item_translation_path(item.id), :class => "button inverse-dark tiny", :method => :get %></div>
 	<%= render item.translations %>
-	<%# render 'translations/form' %>
+	
 </div>
 <% end %>

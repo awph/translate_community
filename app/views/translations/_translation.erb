@@ -1,24 +1,25 @@
 
-<%= button_to "Vote up", project_path, :class => "button tiny", :method => :get %>
-<%= button_to "Vote down", project_path, :class => "button tiny", :method => :get %>
+<div class="panel">
+	<table>
+		<tr>
+			<td><%= translation.value %></td>
+			<td>
+				Score:<%= translation.score %>
+			</td>
+			<td><%= button_to "Vote up", vote_up_translation_path(translation), :class => "button tiny", :method => :put, remote:true %></td>
+			<td><%= button_to "Vote down", vote_down_translation_path(translation), :class => "button tiny", :method => :put, remote:true %></td>
+		</tr>
+		
+		
+		
+   		
+	
+	
+	
+			
+			
 
 
-
-
-<%= div_for translation do %>
-
-	<table class = "table">
-		<tbody>
-			<tr class="success">
-				<td>
-    				<h3><%= translation.value %></h3>
-    				<p>Score: <span><%= translation.score %></span></p>
-                    <p>
-                      <%= link_to 'Up', vote_up_translation_path(translation), method: :put, remote: true %> |
-                      <%= link_to 'Down', vote_down_translation_path(translation), method: :put, remote: true %>
-                    </p>
-    			</td>
-    		</tr>
-    	</tbody>
-    </table>
-<% end %>
+	</table>
+    
+  </div>
