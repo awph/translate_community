@@ -52,6 +52,9 @@ end
 # Used for create Zip file
 gem 'rubyzip'
 
+# User-friendly select options
+gem 'chosen-rails'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
