@@ -73,9 +73,9 @@ class ProjectsController < ApplicationController
 
       translation = Translation.where(item_id: item.id, language_id: 1, value: value)
       if translation
-        Translation.create(item_id: item.id, language_id: 1, user_id: 1, value: value)
+        Translation.create(item_id: item.id, language_id: 1, user_id: current_user.id, value: value)
       else
-        Translation.create(item_id: item.id, language_id: 1, user_id: 1, value: value)
+        Translation.create(item_id: item.id, language_id: 1, user_id: current_user.id, value: value)
       end
     end
     p formats
