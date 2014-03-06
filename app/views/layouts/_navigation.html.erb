@@ -28,23 +28,24 @@
 			</li>
 			<% end %>
 		</ul>
-
+        <% if not current_user.nil? %>
 		<!-- Left Nav Section -->
 		<ul class="left">
 			<li class="has-dropdown">
 				<a href="#">Profile</a>
 				<ul class="dropdown">
 					<li>
-						<%= link_to 'Submitted translations', submitted_translations_user_path('1')%>
+						<%= link_to 'Submitted translations', submitted_translations_user_path(current_user.id)%>
 					</li>
 					<li>
-						<%= link_to 'Your Projects',  user_projects_path('1') %>
+						<%= link_to 'Your Projects',  user_projects_path(current_user.id) %>
 					</li>
 					<li>
-						<%= link_to 'Profile information',  user_path('1') %>
+						<%= link_to 'Profile information',  user_path(current_user.id) %>
 					</li>
 				</ul>
 			</li>
 		</ul>
+      <% end %>
 	</section>
 </nav>
