@@ -1,7 +1,7 @@
 class Translation < ActiveRecord::Base
   has_many :users, through: :user_translations_score
-  has_one :user
-  has_one :language
+  belongs_to :user
+  belongs_to :language
   belongs_to :item
 
   validates :item_id, :language_id, :user_id, :value, presence: true
@@ -28,7 +28,6 @@ class Translation < ActiveRecord::Base
 
   def vote(up)
     user_translations_score = UserTranslationsScore.where(user_id: 1, translation_id: id).take
-    p user_translations_score
     if user_translations_score
       user_translations_score.up = up
       user_translations_score.save
