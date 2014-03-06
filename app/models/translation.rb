@@ -16,23 +16,23 @@ class Translation < ActiveRecord::Base
     score
   end
 
-  def vote_up
-    vote(TRUE)
+  def vote_up(current_user)
+    vote(current_user, TRUE)
   end
 
-  def vote_down
-    vote(FALSE)
+  def vote_down(current_user)
+    vote(current_user, FALSE)
   end
 
   private
 
-  def vote(up)
-    user_translations_score = UserTranslationsScore.where(user_id: 1, translation_id: id).take
+  def vote(current_user, up)
+    user_translations_score = UserTranslationsScore.where(user_id: current_user.id, translation_id: id).take
     if user_translations_score
       user_translations_score.up = up
       user_translations_score.save
     else
-      UserTranslationsScore.create(user_id: 1, translation_id: id, up: up)
+      UserTranslationsScore.create(user_id: current_user.id, translation_id: id, up: up)
     end
   end
 
