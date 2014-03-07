@@ -57,7 +57,11 @@ gem 'chosen-rails'
 
 gem 'capistrano'
 
-gem 'rvm'
+gem 'capistrano-rvm'
+
+gem 'capistrano-bundler'
+
+gem 'capistrano-rails'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
