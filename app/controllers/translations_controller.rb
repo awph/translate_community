@@ -65,14 +65,14 @@ class TranslationsController < ApplicationController
   end
 
   def vote_up
-    @translation.vote_up
+    @translation.vote_up(current_user)
     respond_to do |format|
       format.js
     end
   end
 
   def vote_down
-    @translation.vote_down
+    @translation.vote_down(current_user)
     respond_to do |format|
       format.js
     end

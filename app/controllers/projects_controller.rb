@@ -7,7 +7,11 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @projects = Project.all
+    if params[:user_id].nil?
+      @projects = Project.all
+    else
+      @projects = Project.where(user_id: params[:user_id])
+    end
   end
 
   # GET /projects/1
@@ -27,7 +31,7 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
-    @project = Project.new(project_params)
+    @project = Project.new(project_params.merge(:user_id => current_user.id))
 
     respond_to do |format|
       if @project.save
@@ -69,9 +73,9 @@ class ProjectsController < ApplicationController
 
       translation = Translation.where(item_id: item.id, language_id: 1, value: value)
       if translation
-        Translation.create(item_id: item.id, language_id: 1, user_id: 1, value: value, score: 0) # TODO: parent
+        Translation.create(item_id: item.id, language_id: 1, user_id: current_user.id, value: value)
       else
-        Translation.create(item_id: item.id, language_id: 1, user_id: 1, value: value, score: 0)
+        Translation.create(item_id: item.id, language_id: 1, user_id: current_user.id, value: value)
       end
     end
     p formats
@@ -115,13 +119,15 @@ class ProjectsController < ApplicationController
   def fetch_translations
     translations = Hash.new
     @project.items.each do |item|
+      key = item.key
       item.translations.each do |translation|
-        translations[translation.language_id] = Hash.new if translations[translation.language_id].nil?
-        translations[translation.language_id][item.key] = Hash.new if translations[translation.language_id][item.key].nil?
-        score = translations[translation.language_id][item.key][:score]
+        code = translation.language.code
+        translations[code] = Hash.new if translations[code].nil?
+        translations[code][key] = Hash.new if translations[code][key].nil?
+        score = translations[code][key][:score]
         if score.nil? or score < translation.score
-          translations[translation.language_id][item.key][:score] = translation.score
-          translations[translation.language_id][item.key][:value] = translation.value
+          translations[code][key][:score] = translation.score
+          translations[code][key][:value] = translation.value
         end
       end
     end
@@ -142,7 +148,6 @@ class ProjectsController < ApplicationController
 
   def fill_file_ios(language, translations)
     translations[:filename] = language.to_s + ".lproj/" + "Localizable.strings"
-    p translations
     file = translations[:file]
 
     # Header

@@ -1,25 +1,11 @@
-
-<div class="panel">
+<%= div_for translation, class: 'panel' do %>
 	<table>
 		<tr>
 			<td><%= translation.value %></td>
-			<td>
-				Score:<%= translation.score %>
-			</td>
+			<td>Score: <span><%= translation.score %></span></td>
 			<td><%= button_to "Vote up", vote_up_translation_path(translation), :class => "button tiny", :method => :put, remote:true %></td>
 			<td><%= button_to "Vote down", vote_down_translation_path(translation), :class => "button tiny", :method => :put, remote:true %></td>
 		</tr>
-		
-		
-		
-   		
-	
-	
-	
-			
-			
+    </table>
+<% end %>
 
-
-	</table>
-    
-  </div>

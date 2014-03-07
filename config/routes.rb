@@ -8,18 +8,18 @@ TranslateCommunity::Application.routes.draw do
 
   resources :users, only: [:index, :show] do
     get :submitted_translations, on: :member
-    resources :projects#, :name_prefix => "user_"
+    resources :projects
   end
 
   resources :projects do
-    resources :items#, :name_prefix => "project_"
+    resources :items
     put :upload_items, on: :member
     get :download_android, on: :member
     get :download_ios, on: :member
   end
 
   resources :items, only: [:show, :edit, :update, :destroy] do
-    resources :translations#, :name_prefix => "item_"
+    resources :translations
   end
 
   resources :translations do
