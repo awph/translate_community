@@ -55,6 +55,8 @@ gem 'rubyzip'
 # User-friendly select options
 gem 'chosen-rails'
 
+gem 'capistrano'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
