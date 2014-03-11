@@ -1,5 +1,6 @@
 class Translation < ActiveRecord::Base
-  has_many :users, through: :user_translations_score
+  has_many :user_translations_scores
+  has_many :users, through: :user_translations_scores
   belongs_to :user
   belongs_to :language
   belongs_to :item
