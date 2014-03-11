@@ -6,7 +6,8 @@ class User < ActiveRecord::Base
   has_many :projects, dependent: :destroy
   has_many :user_languages
   has_many :languages, through: :user_languages
-  has_many :translations, through: :user_translations_score
+  has_many :user_translations_scores
+  has_many :translations, through: :user_translations_scores
 
   validates :name, :email, presence: true
 end

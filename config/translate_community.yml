@@ -1,0 +1,13 @@
+defaults: &defaults
+  :secret_token: 3493a0ad88c1d147c7abc1729506f1f167525c2f4c5c6185b285a5b0bdb7f9b36df2b23c92669fe24d9efc926a13d20a11181d92c56cc238bbc4f236faad2dcb
+
+development:
+  # we are using standard YML inheritance here, very powerful and native !
+  <<: *defaults
+  :secret_token: i_am_overrided
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

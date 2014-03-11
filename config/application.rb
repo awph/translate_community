@@ -6,6 +6,9 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
+# load the configuration for the current environment in a global variable
+APP_CONFIG = YAML.load_file(File.expand_path('../translate_community.yml', __FILE__))[Rails.env]
+
 module TranslateCommunity
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
