@@ -15,8 +15,27 @@
   <strong>Description:</strong>
   <%= @project.description %>
 </p>
+<% p "------------------"%>
+<% p @project.user.languages%>
+<% @project.user.languages.each do |language| %>
+prout
+<%end%>
 
-<%= render @project.items %>
+
+<dl class="tabs" data-tab>
+	
+  		<dd class="active"><a href="#panel2-1">Tab 1</a></dd>
+  	
+</dl>
+<div class="tabs-content">
+	
+	  <div class="content active" id="panel2-1">
+	    <%= render @project.items %>
+	  </div>
+  	
+</div>
+
+
 
 <%= form_for(@project, url: upload_items_project_path(@project), method: :put, remote: true) do |f| %>
     <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
@@ -26,7 +45,7 @@
 
 
 <%= button_to "Add item", new_project_item_path(@project), :class => "button inverse-dark tiny", :method => :get %>
-</div>
+
 <table>
 	<tr>
 		<td><%= button_to "Edit", edit_project_path(@project), :class => "button inverse-dark tiny", :method => :get %></td>
