@@ -4,7 +4,7 @@ defaults: &defaults
 development:
   # we are using standard YML inheritance here, very powerful and native !
   <<: *defaults
-  :secret_token: i_am_overrided
+  :secret_token: bd6696bb8e9370bff78e145e9512d3d8c9d884229e58c01bf84295576a9068d8662ff1f36ffd43b45c54e5779b09d51d9a9d2a415e039ae9a9f7d10467d22faa
 
 test:
   <<: *defaults

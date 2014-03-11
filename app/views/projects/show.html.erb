@@ -13,26 +13,21 @@
 
 <p style="margin: 10px">
   <strong>Description:</strong>
-  <%= @project.description %>
-</p>
-<% p "------------------"%>
-<% p @project.user.languages%>
-<% @project.user.languages.each do |language| %>
-prout
-<%end%>
+
+
 
 
 <dl class="tabs" data-tab>
-	
+	<%= @project.user.languages.each  do |language|  %>
   		<dd class="active"><a href="#panel2-1">Tab 1</a></dd>
-  	
+  	<% end %>
 </dl>
 <div class="tabs-content">
-	
+	<%= @project.user.languages.each do |language| %>
 	  <div class="content active" id="panel2-1">
 	    <%= render @project.items %>
 	  </div>
-  	
+  	<% end %>
 </div>
 
 
