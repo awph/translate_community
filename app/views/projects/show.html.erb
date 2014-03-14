@@ -13,21 +13,42 @@
 
 <p style="margin: 10px">
   <strong>Description:</strong>
-
+  <%= @project.description %>
 
 
 
 <dl class="tabs" data-tab>
+	
+	<dd class="active">
 	<%= @project.user.languages.each  do |language|  %>
-  		<dd class="active"><a href="#panel2-1">Tab 1</a></dd>
+  		<a href="#<%="langue" + language.name%>"><%= language.name%></a></dd><dd>
   	<% end %>
+  	</dd>
 </dl>
 <div class="tabs-content">
 	<%= @project.user.languages.each do |language| %>
-	  <div class="content active" id="panel2-1">
-	    <%= render @project.items %>
+		<div class="content active" id="<%="langue" +language.name%>">
+			<% @project.items.each do |item|%>
+				<div class= "panel" >
+					<h2><%= item.key %></h2>
+					<% item.translations.each do |translation| %>
+						<table>
+							<% if translation.language_id == language.id%>
+								<tr>
+									<td><%= translation.value %></td>
+									<td>Score: <span><%= translation.score %></span></td>
+									<td><%= button_to "Vote up", vote_up_translation_path(translation), :class => "button tiny", :method => :put, remote:true %></td>
+									<td><%= button_to "Vote down", vote_down_translation_path(translation), :class => "button tiny", :method => :put, remote:true %></td>
+								</tr>
+							<%end%>
+					    </table>
+					<% end %>
+					<div><%= button_to "offer translation", new_item_translation_path(item.id), :class => "button inverse-dark tiny", :method => :get %></div>
+					
+				</div>
+	  		<%end%>
 	  </div>
-  	<% end %>
+	<% end %>
 </div>
 
 
