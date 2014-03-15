@@ -143,7 +143,23 @@ class ProjectsController < ApplicationController
 
   def fill_file_android(language, translations)
     translations[:filename] = "values-" + language.to_s + "/strings.xml"
+    file = translations[:file]
 
+    builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
+      xml.resources {
+        translations.each do |key, value|
+          unless key == :file or key == :filename
+            xml.string_('name' => key) {
+              xml.text(value[:value])
+            }
+          end
+        end
+      }
+    end
+
+    file.puts builder.to_xml
+
+    file.close
   end
 
   def fill_file_ios(language, translations)
