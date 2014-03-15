@@ -32,6 +32,7 @@ class ProjectsController < ApplicationController
   # POST /projects.json
   def create
     @project = Project.new(project_params.merge(:user_id => current_user.id))
+    @project.language_ids = params[:project][:language_ids]
 
     respond_to do |format|
       if @project.save
@@ -47,6 +48,7 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
+    @project.language_ids = params[:project][:language_ids]
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
@@ -240,6 +242,6 @@ class ProjectsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
-      params.require(:project).permit(:user_id, :name, :description)
+      params.require(:project).permit(:user_id, :name, :description, :language_ids)
     end
 end
