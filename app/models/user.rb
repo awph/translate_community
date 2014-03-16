@@ -10,4 +10,14 @@ class User < ActiveRecord::Base
   has_many :translations, through: :user_translations_scores
 
   validates :name, :email, presence: true
+
+  def reputation
+    rep = 1
+    translations = Translation.where(user_id: id)
+    translations.each do |translation|
+      rep += translation.score
+    end
+    rep
+  end
+
 end
