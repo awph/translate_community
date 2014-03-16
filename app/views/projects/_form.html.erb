@@ -1,27 +1,42 @@
 <%= form_for(@project) do |f| %>
-	<div style="margin:10px">
-  <% if @project.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
+<div style="margin:10px">
+	<% if @project.errors.any? %>
+	<div id="error_explanation">
+		<h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
 
-      <ul>
-      <% @project.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+		<ul>
+			<% @project.errors.full_messages.each do |msg| %>
+			<li>
+				<%= msg %>
+			</li>
+			<% end %>
+		</ul>
+	</div>
+	<% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_field :description %>
-  </div>
-  <div class="actions">
-    <%= f.submit :class => "button inverse-dark tiny", :method => :get %>
-  </div>
-  </div>
+	<div class="field">
+		<%= f.label :name %>
+		<br>
+		<%= f.text_field :name %>
+	</div>
+	<div class="field">
+		<%= f.label :description %>
+		<br>
+		<%= f.text_field :description %>
+	</div>
+	<div class="field">
+		<%= f.label :languages %>
+		<br>
+		<%= f.collection_select :language_ids,
+		Language.all,
+		:id,
+		:name,
+		{ include_blank: true },
+		{ class: 'chosen-select', :multiple=>true }
+		%>
+	</div>
+	<div class="actions">
+		<%= f.submit :class => "button inverse-dark tiny", :method => :get %>
+	</div>
+</div>
 <% end %>

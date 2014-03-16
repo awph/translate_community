@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140301154728) do
+ActiveRecord::Schema.define(version: 20140315113053) do
 
   create_table "items", force: true do |t|
     t.integer  "project_id"
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(version: 20140301154728) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "project_languages", force: true do |t|
+    t.integer  "project_id"
+    t.integer  "language_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "project_languages", ["language_id"], name: "index_project_languages_on_language_id", using: :btree
+  add_index "project_languages", ["project_id"], name: "index_project_languages_on_project_id", using: :btree
 
   create_table "projects", force: true do |t|
     t.integer  "user_id"
