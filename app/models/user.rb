@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :translations, through: :user_translations_scores
 
   validates :name, :email, presence: true
+  
+  accepts_nested_attributes_for :user_languages
 
   def reputation
     rep = 1
