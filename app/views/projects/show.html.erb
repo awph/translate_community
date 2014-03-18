@@ -7,7 +7,7 @@
 </p>
 -->
 <p>
-  <h1>Project: <%= @project.name %></h1>
+  <h1>Project: <% @project.name %></h1>
   
 </p>
 
@@ -20,13 +20,13 @@
 <dl class="tabs" data-tab>
 	
 	<dd class="active">
-	<%= @project.user.languages.each  do |language|  %>
+	<% @project.user.languages.each  do |language|  %>
   		<a href="#<%="langue" + language.name%>"><%= language.name%></a></dd><dd>
   	<% end %>
   	</dd>
 </dl>
 <div class="tabs-content">
-	<%= @project.user.languages.each do |language| %>
+	<% @project.user.languages.each do |language| %>
 		<div class="content active" id="<%="langue" +language.name%>">
 			<% @project.items.each do |item|%>
 				<div class= "panel" >
@@ -44,7 +44,7 @@
 					    </table>
 					<% end %>
 					<div><%= button_to "offer translation", new_item_translation_path(item.id), :class => "button inverse-dark tiny", :method => :get %></div>
-					
+					<%= render template: "translations/new"%>
 				</div>
 	  		<%end%>
 	  </div>
@@ -74,3 +74,5 @@
 <%= link_to 'Download Android', download_android_project_path(@project) %> |
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
+
+</div>
