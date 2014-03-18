@@ -31,14 +31,14 @@ class Translation < ActiveRecord::Base
     user_translations_score = UserTranslationsScore.where(user_id: current_user.id, translation_id: id).take
     translation = Translation.where(id: id, user_id: current_user.id).take
     if translation.nil?
-      # error cant up my translation
-    else
-      if user_translations_score
+      if user_translations_score.nil?
+        UserTranslationsScore.create(user_id: current_user.id, translation_id: id, up: up)
+      else
         user_translations_score.up = up
         user_translations_score.save
-      else
-        UserTranslationsScore.create(user_id: current_user.id, translation_id: id, up: up)
       end
+    else
+      # error cant up my translation
     end
   end
 
