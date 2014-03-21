@@ -3,6 +3,7 @@ require 'zip'
 
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :upload_items, :destroy, :upload_items, :download_android, :download_ios]
+  before_filter :authenticate_user!
 
   # GET /projects
   # GET /projects.json
