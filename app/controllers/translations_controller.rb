@@ -1,6 +1,7 @@
 class TranslationsController < ApplicationController
   before_action :set_translation, only: [:show, :edit, :update, :destroy, :vote_up, :vote_down]
   before_action :get_item, except: [:index]
+  before_filter :authenticate_user!
 
   # GET /translations
   # GET /translations.json
