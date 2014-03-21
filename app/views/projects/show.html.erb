@@ -44,7 +44,7 @@
 					    </table>
 					<% end %>
 					<div><%= button_to "offer translation", new_item_translation_path(item.id), :class => "button inverse-dark tiny", :method => :get %></div>
-					<%= render template: "translations/new"%>
+					<%= render :partial => "translations/form", locals: {item: item, language: language}%>
 				</div>
 	  		<%end%>
 	  </div>
