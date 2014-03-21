@@ -4,7 +4,7 @@ TranslateCommunity::Application.routes.draw do
 
   # http://weblog.jamisbuck.org/2007/2/5/nesting-resources
 
-  root to: 'projects#index'
+  root to: 'welcome#index'
 
   resources :users, only: [:index, :show] do
     get :submitted_translations, on: :member
