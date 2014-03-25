@@ -224,6 +224,11 @@ class ProjectsController < ApplicationController
   def download_ios
     download(:ios)
   end
+  
+  def offer_translation
+    @item = Item.find(params[:item_id])
+    @language = Language.find(params[:language_id])
+  end
 
   # DELETE /projects/1
   # DELETE /projects/1.json

@@ -38,6 +38,7 @@ class TranslationsController < ApplicationController
         format.html { render action: 'new' }
         format.json { render json: @translation.errors, status: :unprocessable_entity }
       end
+      format.js
     end
   end
 

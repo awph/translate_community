@@ -30,16 +30,15 @@
         <% @project.user.languages.each do |language| %>
             <div class="content active" id="<%="langue" +language.name%>">
                 <% @project.items.each do |item|%>
-                    <div class= "panel" >
-                        <h2><%= item.key %></h2>
+                    <div class="panel" id="translations_<%=item.id%>_<%=language.id%>" >
+                        <h3 class="subheader"><%= item.key %></h3>
                         <% item.translations.each do |translation| %>
                           <% if translation.language_id == language.id%>
                             <%= render translation %>
                           <% end %>
                         <% end %>
-                        <div><%= button_to "offer translation", new_item_translation_path(item.id), :class => "button inverse-dark tiny", :method => :get %></div>
-                        <%= render :partial => "translations/form", locals: {item: item, language: language}%>
-                    </div>
+                        <div id="button_offer_translation_<%=item.id%>_<%=language.id%>"><%= button_to "offer translation", offer_translation_project_path(:item_id => item.id, :language_id => language.id) , :class => "button primary-dark small", :method => :put, remote: true%></div>
+                     </div>
                 <%end%>
           </div>
         <% end %>
