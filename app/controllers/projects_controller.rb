@@ -9,10 +9,11 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     if params[:user_id].nil?
-      @projects = Project.all
+       @projects = Project.joins(:project_languages).where('project_languages.language_id' => current_user.language_ids) 
     else
-      @projects = Project.where(user_id: params[:user_id])
-    end
+      @projects = Project.where(user_id: params[:user_id])     
+    end   
+   
   end
 
   # GET /projects/1
