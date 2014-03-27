@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :get_project
   before_filter :authenticate_user!
+  before_filter :access_control, only: [:edit, :update, :destroy, :new, :create]
 
   # GET /items
   # GET /items.json
@@ -82,5 +83,9 @@ class ItemsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
       params.require(:item).permit(:project_id, :key)
+    end
+    
+    def access_control
+      redirect_not_authorized unless @project.user_id == current_user.id
     end
 end
