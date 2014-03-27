@@ -7,6 +7,10 @@ class ApplicationController < ActionController::Base
   
   protected  
   
+  def redirect_not_authorized
+    redirect_to root_url, alert: "Action not authorized."
+  end
+  
   def configure_permitted_parameters
     devise_parameter_sanitizer.for(:sign_up) {|u| 
       u.permit(:name, :email, :password, language_ids: [])}

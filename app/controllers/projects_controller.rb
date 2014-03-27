@@ -2,8 +2,9 @@ require 'nokogiri'
 require 'zip'
 
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :upload_items, :destroy, :upload_items, :download_android, :download_ios]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :upload_items, :download_android, :download_ios]
   before_filter :authenticate_user!
+  before_filter :access_control, only: [:edit, :destroy, :upload_items, :update, :download_android, :download_ios]
 
   # GET /projects
   # GET /projects.json
@@ -33,6 +34,9 @@ class ProjectsController < ApplicationController
   # POST /projects
   # POST /projects.json
   def create
+    
+    
+    
     @project = Project.new(project_params.merge(:user_id => current_user.id))
     @project.language_ids = params[:project][:language_ids]
 
@@ -250,5 +254,9 @@ class ProjectsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def project_params
       params.require(:project).permit(:user_id, :name, :description, :language_ids)
+    end
+    
+    def access_control
+      redirect_not_authorized unless @project.user_id == current_user.id
     end
 end
