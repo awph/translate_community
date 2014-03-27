@@ -34,6 +34,12 @@ end
 
 group :development do
   gem 'rails_layout'
+
+  # Use Capistrano for deployment
+  gem 'capistrano'
+  gem 'capistrano-rvm'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
 end
 
 # Used for login management
@@ -42,12 +48,12 @@ gem 'devise'
 # Used for extract items of XML files (Android)
 gem 'nokogiri'
 
-gem 'foundation-rails'
+gem 'zurb-foundation'
 
-gem 'compass-rails'
-group :assets do
+#gem 'compass-rails'
+#group :assets do
   # Add any compass extensions here
-end
+#end
 
 # Used for create Zip file
 gem 'rubyzip'
@@ -55,23 +61,11 @@ gem 'rubyzip'
 # User-friendly select options
 gem 'chosen-rails'
 
-gem 'capistrano'
-
-gem 'capistrano-rvm'
-
-gem 'capistrano-bundler'
-
-gem 'capistrano-rails'
-
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
 # Use unicorn as the app server
 # gem 'unicorn'
-
-# Use Capistrano for deployment
-gem 'capistrano', group: :development
-gem 'capistrano-rvm'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]

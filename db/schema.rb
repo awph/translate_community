@@ -49,6 +49,15 @@ ActiveRecord::Schema.define(version: 20140321124514) do
 
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
 
+  create_table "topic", force: true do |t|
+    t.string   "title",  limit: 50, null: false
+    t.datetime "date",              null: false
+    t.boolean  "locked",            null: false
+    t.boolean  "pinned",            null: false
+  end
+
+  add_index "topic", ["id"], name: "id_UNIQUE", unique: true, using: :btree
+
   create_table "translations", force: true do |t|
     t.integer  "item_id"
     t.integer  "language_id"
