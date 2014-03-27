@@ -1,0 +1,3 @@
+$('div#button_offer_translation_<%=@translation.item.id%>_<%=@translation.language.id%>').before("<%= escape_javascript(render @translation)%>");
+$('div#button_offer_translation_<%=@translation.item.id%>_<%=@translation.language.id%>').fadeIn(0);
+$('div#button_offer_translation_<%=@translation.item.id%>_<%=@translation.language.id%>').siblings('form#new_translation').remove();

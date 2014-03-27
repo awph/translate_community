@@ -14,6 +14,7 @@ TranslateCommunity::Application.routes.draw do
   resources :projects do
     resources :items
     put :upload_items, on: :member
+    put :offer_translation, on: :member
     get :download_android, on: :member
     get :download_ios, on: :member
   end

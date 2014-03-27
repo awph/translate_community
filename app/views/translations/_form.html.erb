@@ -2,7 +2,7 @@
    translation = Translation.new(item_id: item.id, language_id: language.id, user_id: current_user.id)
 %>
 
-<%= form_for([item, translation]) do |f| %>
+<%= form_for([item, translation], remote: true) do |f| %>
   <% if translation != nil && translation.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(translation.errors.count, "error") %> prohibited this translation from being saved:</h2>
@@ -22,11 +22,10 @@
   
   
   <div class="field">
-    <%= f.label :value %><br>
-    <%= f.text_field :value %>
+    <%= f.text_field :value, :placeholder => "Your translation" %>
   </div>
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "validate", :class => 'button success-darkest small' %>
   </div>
 <% end %>
