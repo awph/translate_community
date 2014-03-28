@@ -12,7 +12,7 @@
 	                <% @project.items.each do |item|%>
 	                    <div class="panel" id="translations_<%=item.id%>_<%=language.id%>" >
 	                        <h4 class="subheader"><%= item.key %></h4>
-	                        <% item.translations.each do |translation| %>
+	                        <% item.translations.sort_by(&:score).reverse.each do |translation| %>
 	                          <% if translation.language_id == language.id%>
 	                            <%= render translation %>
 	                          <% end %>

@@ -7,6 +7,7 @@ class Translation < ActiveRecord::Base
 
   validates :item_id, :language_id, :user_id, :value, presence: true
 
+
   def score
     score = 0
     UserTranslationsScore.where(translation_id: id).each do |vote|
