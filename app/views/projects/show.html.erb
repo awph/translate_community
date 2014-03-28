@@ -11,7 +11,7 @@
         		<div class="content">
 	                <% @project.items.each do |item|%>
 	                    <div class="panel" id="translations_<%=item.id%>_<%=language.id%>" >
-	                        <h3 class="subheader"><%= item.key %></h3>
+	                        <h4 class="subheader"><%= item.key %></h4>
 	                        <% item.translations.each do |translation| %>
 	                          <% if translation.language_id == language.id%>
 	                            <%= render translation %>

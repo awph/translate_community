@@ -1,7 +1,7 @@
 <%= div_for translation do %>
-	<table>
+	<table width="100%">
 		<tr>
-			<td><%= translation.value %></td>
+			<td width="60%"><%= translation.value %></td>
 			<td>Score: <span><%= translation.score %></span></td>
 			<%if translation.item.project.user.id != current_user.id%>
 				<td>
