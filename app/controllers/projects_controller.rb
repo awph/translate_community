@@ -10,7 +10,7 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     if params[:user_id].nil?
-       @projects = Project.joins(:project_languages).where('project_languages.language_id' => current_user.language_ids) 
+       @projects = Project.joins(:project_languages).where('project_languages.language_id' => current_user.language_ids).group('project_id')
     else
       @projects = Project.where(user_id: params[:user_id])     
     end   

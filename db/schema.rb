@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140321124514) do
+ActiveRecord::Schema.define(version: 20140328150016) do
 
   create_table "items", force: true do |t|
     t.integer  "project_id"
@@ -49,20 +49,11 @@ ActiveRecord::Schema.define(version: 20140321124514) do
 
   add_index "projects", ["user_id"], name: "index_projects_on_user_id", using: :btree
 
-  create_table "topic", force: true do |t|
-    t.string   "title",  limit: 50, null: false
-    t.datetime "date",              null: false
-    t.boolean  "locked",            null: false
-    t.boolean  "pinned",            null: false
-  end
-
-  add_index "topic", ["id"], name: "id_UNIQUE", unique: true, using: :btree
-
   create_table "translations", force: true do |t|
     t.integer  "item_id"
     t.integer  "language_id"
     t.integer  "user_id"
-    t.string   "value"
+    t.text     "value"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

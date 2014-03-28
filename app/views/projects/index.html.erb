@@ -5,18 +5,20 @@
 
   
    	<% @projects.each do |project| %>
-    	<div class= "panel" style= "margin: 10px" >
-        	<span class="label"><%= project.user_id %></span>
-        	<span class="label"><%= project.name %></span>
-        	<div style="margin: 10px">
-        		<%= project.description %>
-        	</div>
-        	<div>
-        		<%= link_to 'Show', project %>
-        		<%= link_to 'Edit', edit_project_path(project) %>
-        		<%= link_to 'Destroy', project, method: :delete, data: { confirm: 'Are you sure?' } %>
-        	</div>
-    	</div>
+    	<div style= "margin: 10px;" >
+			<h4><%= link_to project.name, project, :color => "white"%></h4>
+			<blockquote>
+				<%= project.description %>
+				<cite>
+					<%= project.user.name %>
+				</cite>
+			</blockquote>
+        		
+			items: <%= project.items.count %>
+			<br>
+			translated:
+		</div>
+	    <hr />
   	<% end %>
   
 </div>
