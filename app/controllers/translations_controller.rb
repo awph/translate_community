@@ -3,7 +3,6 @@ class TranslationsController < ApplicationController
   before_action :get_item, except: [:index]
   before_filter :authenticate_user!
   before_filter :access_control_existing, only: [:edit, :update, :destroy]
-  before_filter :access_control_new, only: [:new, :create]
 
   # GET /translations
   # GET /translations.json
@@ -104,10 +103,5 @@ class TranslationsController < ApplicationController
     
     def access_control_existing
       redirect_not_authorized unless @translation.user_id == current_user.id
-    end
-    
-    def access_control_new
-      project = Project.find(@item.project_id)
-      redirect_not_authorized unless project.user_id == current_user.id
     end
 end
