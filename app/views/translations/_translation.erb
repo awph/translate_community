@@ -1,17 +1,30 @@
-<%= div_for translation do %>
-	<table width="100%">
-		<tr>
-			<td width="60%"><%= translation.value %></td>
-			<td>Score: <span><%= translation.score %></span></td>
-			<%if translation.item.project.user.id != current_user.id%>
-				<td>
-					<ul class="button-group round even-2">
-						<li><%= button_to "Vote up", vote_up_translation_path(translation), :class => "button success small", :method => :put, remote:true %></li>
-						<li><%= button_to "Vote down", vote_down_translation_path(translation), :class => "button alert small", :method => :put, remote:true %></li>
-					</ul>
-				</td>
-			<%end%>
-		</tr>
-    </table>
+<%= div_for translation, :class => "row" do %>
+    <div class="large-8 columns">
+      <blockquote>
+        <%= translation.value %>
+        <cite>
+          <%= translation.user.name %>
+        </cite>
+      </blockquote>
+    </div>
+    <div class="large-2 columns">
+      <p><%= "<span class=\"glyphicon glyphicon-star\" style=\"color: #1abc9c; padding-left:-20px;\"></span>".html_safe if @best %> Score: <span id="score"><%= translation.score %></span></p>
+    </div>
+    <% if translation.user.id != current_user.id and translation.item.project.user.id != current_user.id %>
+    <div class="large-2 columns">
+        <ul class="button-group round even-2">
+            <li>
+            <%= link_to vote_up_translation_path(translation), :class => "button success small", :method => :put, remote:true do %>
+                <span class="glyphicon glyphicon-thumbs-up"></span>
+            <% end %>
+            </li>
+            <li>
+              <%= link_to vote_down_translation_path(translation), :class => "button alert small", :method => :put, remote:true do %>
+                  <span class="glyphicon glyphicon-thumbs-down"></span>
+              <% end %>
+            </li>
+        </ul>
+    </div>
+    <% end %>
 <% end %>
 

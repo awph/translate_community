@@ -10,8 +10,10 @@
  *
  *= require_self
  *= require chosen
+ *= require foundation
  *= require_tree .
  */
+@import 'bootstrap/glyphicons';
 ul.chosen-choices > li > input[type="text"]
 {
   min-height: 27px;

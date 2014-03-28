@@ -1,28 +1,36 @@
 <p id="notice"><%= notice %></p>
-<h1 align="middle"><%= @project.name %></h1>
+<h1 style="text-align:center"><%= @project.name %></h1>
 <hr>
+<% first = true %>
 <%= render 'menu' %>
 <div class="large-9 columns">
-  <h5><%= @project.description %></h5>
-    <div class="section-container tabs" data-section>
-        <% current_user.languages.each  do |language|  %>
-        	<section class = "section">
-        		<p class="title"><a href="#<%="langue" + language.name%>"><%=language.name%></a></p>
-        		<div class="content">
-	                <% @project.items.each do |item|%>
-	                    <div class="panel" id="translations_<%=item.id%>_<%=language.id%>" >
-	                        <h4 class="subheader"><%= item.key %></h4>
-	                        <% item.translations.sort_by(&:score).reverse.each do |translation| %>
-	                          <% if translation.language_id == language.id%>
-	                            <%= render translation %>
-	                          <% end %>
-	                        <% end %>
-	                        <div id="button_offer_translation_<%=item.id%>_<%=language.id%>"><%= button_to "offer translation", offer_translation_project_path(:item_id => item.id, :language_id => language.id) , :class => "button primary-dark small", :method => :put, remote: true%></div>
-	                     </div>
-	                <%end%>
-			    </div>
-            </section>
-        <% end %>
+  <blockquote>
+    <%= @project.description %>
+    <cite>
+      <%= @project.user.name %>
+    </cite>
+  </blockquote>
+  <div class="section-container tabs" data-section>
+    <% current_user.languages.each  do |language|  %>
+        <section class="section <%= "active" if first %>"><% first = false %>
+          <p class="title"><a href="#<%="langue" + language.name%>"><%=language.name%></a></p>
+          <div class="content">
+            <% @project.items.each do |item|%>
+                <div class="" id="translations_<%=item.id%>_<%=language.id%>" >
+                  <h4 class="subheader"><%= item.key %></h4>
+                  <hr />
+                  <% @best = true %>
+                  <% item.translations.sort_by(&:score).reverse.each do |translation| %>
+                        <% if translation.language_id == language.id%>
+                            <%= render translation %>
+                        <% end %>
+                        <% @best = false %>
+                    <% end %>
+                    <div id="button_offer_translation_<%=item.id%>_<%=language.id%>"><%= button_to "Offer new translation", offer_translation_project_path(:item_id => item.id, :language_id => language.id) , :class => "button primary-dark small", :method => :put, remote: true%></div>
+                  </div>
+              <%end%>
+            </div>
+          </section>
+      <% end %>
     </div>
-
 </div>
