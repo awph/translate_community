@@ -12,3 +12,7 @@
  *= require chosen
  *= require_tree .
  */
+ul.chosen-choices > li > input[type="text"]
+{
+  min-height: 27px;
+}
