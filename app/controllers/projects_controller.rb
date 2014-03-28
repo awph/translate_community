@@ -67,6 +67,7 @@ class ProjectsController < ApplicationController
   end
 
   def upload_items
+    language_id = params[:project][:language_ids]
     uploaded_io = params[:project][:new_items]
     contents = uploaded_io.read
     items = case uploaded_io.content_type
@@ -75,15 +76,15 @@ class ProjectsController < ApplicationController
             end
     items.each do |name, value|
       item = Item.where(project_id: @project.id, key: name).take
-      if !item
+      if item.nil?
         item = Item.create(project_id: @project.id, key: name)
       end
 
       translation = Translation.where(item_id: item.id, language_id: 1, value: value)
       if translation
-        Translation.create(item_id: item.id, language_id: 1, user_id: current_user.id, value: value)
+        Translation.create(item_id: item.id, language_id: language_id, user_id: current_user.id, value: value)
       else
-        Translation.create(item_id: item.id, language_id: 1, user_id: current_user.id, value: value)
+        Translation.create(item_id: item.id, language_id: language_id, user_id: current_user.id, value: value)
       end
     end
     p formats
