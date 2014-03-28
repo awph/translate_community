@@ -61,6 +61,9 @@ gem 'rubyzip'
 # User-friendly select options
 gem 'chosen-rails'
 
+# Glyphicons
+gem 'bootstrap-glyphicons'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
