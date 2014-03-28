@@ -1,10 +1,16 @@
 <div class="large-3 columns">
   <ul class="side-nav">
+    <% if @project.user == current_user %>
     <li><%= link_to 'Add an item', new_project_item_path(@project) %></li>
     <li><%= link_to 'Import items', "#" %></li>
+    <% end %>
+    <% if @project.items.count > 0 %>
     <li><%= link_to 'Download iOS', download_ios_project_path(@project) %></li>
     <li><%= link_to 'Download Android', download_android_project_path(@project) %></li>
+    <% end %>
+    <% if @project.user == current_user %>
     <li><%= link_to 'Edit', edit_project_path(@project) %></li>
+    <% end %>
   </ul>
 
   <%= form_for(@project, url: upload_items_project_path(@project), method: :put, remote: true) do |f| %>
