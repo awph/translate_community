@@ -1,8 +1,12 @@
-<%= div_for item do %>
-<div class= "panel" >
-	<h2><%= item.key %></h2>
-	<div><%= button_to "offer translation", new_item_translation_path(item.id), :class => "button inverse-dark tiny", :method => :get %></div>
-	<%= render item.translations %>
-	
+<div id="translations_<%=item.id%>_<%=language.id%>" >
+  <h4 class="subheader"><%= item.key %></h4>
+  <hr />
+  <% @best = true %>
+  <% item.translations.sort_by(&:score).reverse.each do |translation| %>
+      <% if translation.language_id == language.id%>
+          <%= render translation %>
+          <% @best = false %>
+      <% end %>
+  <% end %>
+  <div id="button_offer_translation_<%=item.id%>_<%=language.id%>"><%= button_to "Offer new translation", offer_translation_project_path(:item_id => item.id, :language_id => language.id) , :class => "button primary-dark small", :method => :put, remote: true%></div>
 </div>
-<% end %>
