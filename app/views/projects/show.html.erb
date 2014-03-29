@@ -10,7 +10,7 @@
     </cite>
   </blockquote>
   <div class="section-container tabs" data-section>
-    <% languages = current_user.languages & @project.languages %>
+    <% languages = current_user != @project.user ? current_user.languages & @project.languages : @project.languages %>
     <% languages.each  do |language|  %>
         <section class="section <%= "active" if first %>"><% first = false %>
           <p class="title"><a href="#<%= "langue" + language.name %>"><%= language.name %></a></p>
