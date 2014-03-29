@@ -16,7 +16,7 @@
         <td><%= translation.language.name %></td>
         <td><%= translation.value %></td>
         <td><%= translation.score %></td>
-        <td><%= link_to 'Show', translation %></td>
+        <td><%= link_to 'Show', '/projects/' + translation.item.project.id.to_s + "#translation_" + translation.id.to_s %></td>
       </tr>
     <% end %>
   </tbody>

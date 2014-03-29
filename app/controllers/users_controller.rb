@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   def submitted_translations
     @translations = Translation.where(user_id: params[:id])
     
-    render "translations/index"
+    render "translations/submited"
   end
   private
     # Use callbacks to share common setup or constraints between actions.

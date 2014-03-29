@@ -12,7 +12,7 @@ TranslateCommunity::Application.routes.draw do
   end
 
   resources :projects do
-    resources :items
+    resources :items, only: nil
     put :upload_items, on: :member
     put :offer_translation, on: :member
     get :download_android, on: :member
@@ -23,7 +23,7 @@ TranslateCommunity::Application.routes.draw do
     resources :translations
   end
 
-  resources :translations do
+  resources :translations, only: nil do
     put :vote_up, on: :member
     put :vote_down, on: :member
   end
