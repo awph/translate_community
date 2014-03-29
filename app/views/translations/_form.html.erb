@@ -3,29 +3,25 @@
 %>
 
 <%= form_for([item, translation], remote: true) do |f| %>
-  <% if translation != nil && translation.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(translation.errors.count, "error") %> prohibited this translation from being saved:</h2>
-
-      <ul>
-      <% translation.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <% if translation != nil && translation.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(translation.errors.count, "error") %> prohibited this translation from being saved:</h2>
+          <ul>
+            <% translation.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
 
     <%= f.hidden_field :item_id %>
     <%= f.hidden_field :language_id %>
     <%= f.hidden_field :user_id %>
-  
-  
-  
-  <div class="field" id ="text_box">
-    <%= f.text_field :value, :placeholder => "Your translation" %>
-  </div>
 
-  <div class="actions">
-    <%= f.submit "Validate", :class => 'button success-darkest small' %>
-  </div>
+    <div class="field" id ="text_box">
+      <%= f.text_field :value, :placeholder => "Your translation" %>
+    </div>
+    <div class="actions">
+      <%= f.submit "Validate", :class => 'button success-darkest small' %>
+    </div>
 <% end %>

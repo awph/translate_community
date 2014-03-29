@@ -23,8 +23,8 @@
                   <% item.translations.sort_by(&:score).reverse.each do |translation| %>
                       <% if translation.language_id == language.id%>
                           <%= render translation %>
+                          <% @best = false %>
                       <% end %>
-                      <% @best = false %>
                   <% end %>
                   <div id="button_offer_translation_<%=item.id%>_<%=language.id%>"><%= button_to "Offer new translation", offer_translation_project_path(:item_id => item.id, :language_id => language.id) , :class => "button primary-dark small", :method => :put, remote: true%></div>
                 </div>

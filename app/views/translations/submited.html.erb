@@ -1,0 +1,23 @@
+<h1>Submitted translations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Language</th>
+      <th>Translation</th>
+      <th>Score</th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @translations.each do |translation| %>
+      <tr>
+        <td><%= translation.language.name %></td>
+        <td><%= translation.value %></td>
+        <td><%= translation.score %></td>
+        <td><%= link_to 'Show', translation %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
