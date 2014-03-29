@@ -5,4 +5,22 @@ class Project < ActiveRecord::Base
   has_many :languages, through: :project_languages
 
   validates :user_id, :name, :description, presence: true
+
+  def translations
+    translations = Hash.new
+    items.each do |item|
+      key = item.key
+      item.translations.each do |translation|
+        code = translation.language.code
+        translations[code] = Hash.new if translations[code].nil?
+        translations[code][key] = Hash.new if translations[code][key].nil?
+        score = translations[code][key][:score]
+        if score.nil? or score < translation.score
+          translations[code][key][:score] = translation.score
+          translations[code][key][:value] = translation.value
+        end
+      end
+    end
+    translations
+  end
 end

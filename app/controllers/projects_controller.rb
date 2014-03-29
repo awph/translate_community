@@ -9,11 +9,10 @@ class ProjectsController < ApplicationController
   # GET /projects
   def index
     if params[:user_id].nil?
-       @projects = Project.joins(:project_languages).where('project_languages.language_id' => current_user.language_ids).group('project_id')
+      @projects = Project.joins(:project_languages).where('project_languages.language_id' => current_user.language_ids).group('project_id')
     else
-      @projects = Project.where(user_id: params[:user_id])     
-    end   
-   
+      @projects = Project.where(user_id: params[:user_id])
+    end
   end
 
   # GET /projects/1
@@ -31,9 +30,6 @@ class ProjectsController < ApplicationController
 
   # POST /projects
   def create
-    
-    
-    
     @project = Project.new(project_params.merge(:user_id => current_user.id))
     @project.language_ids = params[:project][:language_ids]
 
@@ -117,24 +113,7 @@ class ProjectsController < ApplicationController
     items
   end
 
-  def fetch_translations
-    translations = Hash.new
-    @project.items.each do |item|
-      key = item.key
-      item.translations.each do |translation|
-        code = translation.language.code
-        translations[code] = Hash.new if translations[code].nil?
-        translations[code][key] = Hash.new if translations[code][key].nil?
-        score = translations[code][key][:score]
-        if score.nil? or score < translation.score
-          translations[code][key][:score] = translation.score
-          translations[code][key][:value] = translation.value
-        end
-      end
-    end
-    translations
-  end
-
+  # Create a file for each translation
   def create_files(translations)
     translations.each do |language, translation|
       translations[language][:file] = Tempfile.new(language.to_s)
@@ -142,6 +121,7 @@ class ProjectsController < ApplicationController
     translations
   end
 
+  # Fill all translations file with the translations
   def fill_file_android(language, translations)
     translations[:filename] = "values-" + language.to_s.downcase + "/strings.xml"
     file = translations[:file]
@@ -163,6 +143,7 @@ class ProjectsController < ApplicationController
     file.close
   end
 
+  # Fill all translations file with the translations
   def fill_file_ios(language, translations)
     translations[:filename] = language.to_s.downcase + ".lproj/" + "Localizable.strings"
     file = translations[:file]
@@ -199,7 +180,7 @@ class ProjectsController < ApplicationController
   end
 
   def download(type)
-    translations = fetch_translations
+    translations = @project.translations
     translations = create_files(translations)
     translations.each do |language, translation|
       case type
