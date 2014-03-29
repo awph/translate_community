@@ -1,25 +1,22 @@
-<%= form_for([@project, @item]) do |f| %>
-  <% if @item.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@item.errors.count, "error") %> prohibited this item from being saved:</h2>
+<%
+   item = Item.new(project_id: project.id)
+%>
+<%= form_for([project, item]) do |f| %>
+    <% if item.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
 
-      <ul>
-      <% @item.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% item.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+    <%= f.hidden_field :project_id %>
+    <div class="large-12 columns">
+      <%= f.label :key %><br>
+      <%= f.text_field :key%>
     </div>
-  <% end %>
-
-  <div class="large-12 columns">
-    <%= f.label :project_id %><br>
-    <%= f.number_field :project_id %>
-  </div>
-  <div class="large-12 columns">
-    <%= f.label :key %><br>
-    <%= f.text_field :key%>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div><%= f.submit 'Add', :class => "button success-dark" %></div>
 <% end %>

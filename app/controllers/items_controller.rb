@@ -29,9 +29,9 @@ class ItemsController < ApplicationController
 
     respond_to do |format|
       if @item.save
-        format.html { redirect_to project_item_path(@project, @item), notice: 'Item was successfully created.' }
+        format.html { redirect_to project_path(@project), notice: 'Item was successfully created.' }
       else
-        format.html { render action: 'new' }
+        format.html { redirect_to project_path(@project), alert: 'Creating the new item failed!' }
       end
     end
   end
