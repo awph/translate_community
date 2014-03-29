@@ -143,7 +143,7 @@ class ProjectsController < ApplicationController
   end
 
   def fill_file_android(language, translations)
-    translations[:filename] = "values-" + language.to_s + "/strings.xml"
+    translations[:filename] = "values-" + language.to_s.downcase + "/strings.xml"
     file = translations[:file]
 
     builder = Nokogiri::XML::Builder.new(:encoding => 'UTF-8') do |xml|
@@ -164,7 +164,7 @@ class ProjectsController < ApplicationController
   end
 
   def fill_file_ios(language, translations)
-    translations[:filename] = language.to_s + ".lproj/" + "Localizable.strings"
+    translations[:filename] = language.to_s.downcase + ".lproj/" + "Localizable.strings"
     file = translations[:file]
 
     # Header
