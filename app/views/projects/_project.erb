@@ -1,8 +1,14 @@
 <%= div_for project do %>
-	<div class= "panel" style= "margin: 10px" >
-    	<h2><%= link_to project.name, project %></h2>
-    	<div style="margin:15px">
-    		<%= project.description %>
-    	</div>
-    </div>
+      <h4><%= link_to "<span class=\"glyphicon glyphicon-link\" style=\"padding-left:-20px;\"></span> ".html_safe + project.name, project, :color => "white"%></h4>
+      <blockquote>
+        <%= project.description %>
+        <cite>
+          <%= project.user.name %>
+        </cite>
+      </blockquote>
+
+      items: <%= project.items.count %>
+      <br>
+      translated:
 <% end %>
+<hr />
