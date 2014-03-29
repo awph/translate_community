@@ -5,13 +5,11 @@ class TranslationsController < ApplicationController
   before_filter :access_control_existing, only: [:edit, :update, :destroy]
 
   # GET /translations
-  # GET /translations.json
   def index
     @translations = Translation.all
   end
 
   # GET /translations/1
-  # GET /translations/1.json
   def show
   end
 
@@ -25,7 +23,6 @@ class TranslationsController < ApplicationController
   end
 
   # POST /translations
-  # POST /translations.json
   def create
     @translation = Translation.new(translation_params)
     @translation.item_id = @item.id
@@ -34,36 +31,29 @@ class TranslationsController < ApplicationController
     respond_to do |format|
       if @translation.save
         format.html { redirect_to item_translation_path(@item, @translation), notice: 'Translation was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @translation }
       else
         format.html { render action: 'new' }
-        format.json { render json: @translation.errors, status: :unprocessable_entity }
       end
       format.js
     end
   end
 
   # PATCH/PUT /translations/1
-  # PATCH/PUT /translations/1.json
   def update
     respond_to do |format|
       if @translation.update(translation_params)
         format.html { redirect_to @translation, notice: 'Translation was successfully updated.' }
-        format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @translation.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # DELETE /translations/1
-  # DELETE /translations/1.json
   def destroy
     @translation.destroy
     respond_to do |format|
       format.html { redirect_to translations_url }
-      format.json { head :no_content }
     end
   end
 

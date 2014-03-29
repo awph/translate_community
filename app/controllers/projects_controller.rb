@@ -7,7 +7,6 @@ class ProjectsController < ApplicationController
   before_filter :access_control, only: [:edit, :destroy, :upload_items, :update, :download_android, :download_ios]
 
   # GET /projects
-  # GET /projects.json
   def index
     if params[:user_id].nil?
        @projects = Project.joins(:project_languages).where('project_languages.language_id' => current_user.language_ids).group('project_id')
@@ -18,7 +17,6 @@ class ProjectsController < ApplicationController
   end
 
   # GET /projects/1
-  # GET /projects/1.json
   def show
   end
 
@@ -32,7 +30,6 @@ class ProjectsController < ApplicationController
   end
 
   # POST /projects
-  # POST /projects.json
   def create
     
     
@@ -43,25 +40,20 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       if @project.save
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
-        format.json { render action: 'show', status: :created, location: @project }
       else
         format.html { render action: 'new' }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
   end
 
   # PATCH/PUT /projects/1
-  # PATCH/PUT /projects/1.json
   def update
     @project.language_ids = params[:project][:language_ids]
     respond_to do |format|
       if @project.update(project_params)
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
-        format.json { head :no_content }
       else
         format.html { render action: 'edit' }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -237,12 +229,10 @@ class ProjectsController < ApplicationController
   end
 
   # DELETE /projects/1
-  # DELETE /projects/1.json
   def destroy
     @project.destroy
     respond_to do |format|
       format.html { redirect_to projects_url }
-      format.json { head :no_content }
     end
   end
 
