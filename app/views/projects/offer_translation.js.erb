@@ -1,3 +1,3 @@
 $('div#translations_<%=@item.id%>_<%=@language.id%>').append("<%= escape_javascript(render :partial => "translations/form", locals: {item: @item, language: @language})%>");
 $('div#button_offer_translation_<%=@item.id%>_<%=@language.id%>').fadeOut(0);
-$('div#translations_<%=@item.id%>_<%=@language.id%>.new_translation.text_box').focus();
+$('div#translations_<%=@item.id%>_<%=@language.id%>').find('input#translation_value').focus();
