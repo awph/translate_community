@@ -1,5 +1,5 @@
 <%= div_for project do %>
-    <h4><%= link_to "<span class=\"glyphicon glyphicon-link\" style=\"padding-left:-20px;\"></span> ".html_safe + project.name, project, :color => "white"%></h4>
+    <h4><%= link_to "<span class=\"glyphicon glyphicon-link\" style=\"padding-left:-20px;\"></span> ".html_safe + project.name, project, :color => "white", "data-no-turbolink" => true%></h4>
     <blockquote>
       <%= project.description %>
       <cite>
