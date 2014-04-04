@@ -2,7 +2,7 @@
   <h4 class="subheader"><%= item.key %></h4>
   <hr />
   <% @best = true %>
-  <% item.translations.sort_by(&:score).reverse.each do |translation| %>
+  <% item.translations_sorted.each do |translation| %>
       <% if translation.language_id == language.id%>
           <%= render translation %>
           <% @best = false %>
