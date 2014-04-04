@@ -1,14 +1,14 @@
 <%= div_for project do %>
-      <h4><%= link_to "<span class=\"glyphicon glyphicon-link\" style=\"padding-left:-20px;\"></span> ".html_safe + project.name, project, :color => "white"%></h4>
-      <blockquote>
-        <%= project.description %>
-        <cite>
-          <%= project.user.name %>
-        </cite>
-      </blockquote>
-
-      items: <%= project.items.count %>
-      <br>
-      translated:
+    <h4><%= link_to "<span class=\"glyphicon glyphicon-link\" style=\"padding-left:-20px;\"></span> ".html_safe + project.name, project, :color => "white"%></h4>
+    <blockquote>
+      <%= project.description %>
+      <cite>
+        <%= project.user.name %>
+      </cite>
+    </blockquote>
+    <% languages = current_user.languages & project.languages %>
+    <% languages.each do |language| %>
+        <div class="radius progress success large-12"><span class="meter" style="width: <%= project.progression(language) * 100 %>%"><%= language.name %></span></div>
+    <% end %>
 <% end %>
 <hr />
