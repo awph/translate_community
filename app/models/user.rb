@@ -8,7 +8,7 @@ class User < ActiveRecord::Base
   has_many :languages, through: :user_languages
   has_many :user_translations_scores
   has_many :translations, through: :user_translations_scores
-
+  
   validates :name, uniqueness: true, presence: true
 
   accepts_nested_attributes_for :user_languages
