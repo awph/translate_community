@@ -23,4 +23,21 @@ class Project < ActiveRecord::Base
     end
     translations
   end
+
+  def progression(language)
+    if items.count == 0
+      return 0
+    end
+    translated_quantity = 0.0
+    items.each do |item|
+      item.translations.each do |translation|
+        if translation.language.id == language.id
+          translated_quantity += 1
+          break
+        end
+      end
+    end
+    translated_quantity / items.count
+  end
+
 end

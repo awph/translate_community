@@ -9,7 +9,7 @@
         <li><%= link_to 'Download Android', download_android_project_path(@project) %></li>
     <% end %>
     <% if @project.user == current_user %>
-        <li><%= link_to 'Edit', edit_project_path(@project) %></li>
+        <li><%= link_to 'Edit', edit_project_path(@project), "data-no-turbolink" => true %></li>
     <% end %>
   </ul>
 </div>

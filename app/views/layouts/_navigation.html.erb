@@ -1,57 +1,46 @@
 <nav class="top-bar" data-topbar data-no-turbolink="true">
-	<ul class="title-area">
-		<li class="name">
-			<h1>
-			<li>
-				<%= link_to 'Translate Community', root_path%>
-			</li></h1>
-		</li>
+  <ul class="title-area">
+    <li class="name">
+      <h1><%= link_to 'Translate Community', root_path%></h1>
+    </li>
+    <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+  </ul>
 
-	</ul>
-
-	<section class="top-bar-section" >
-		<!-- Right Nav Section -->
-		<ul class="right">
-			<% if user_signed_in? %>
-			<li>
-				<span style="color: #fff">Logged as : <%= link_to current_user.name, current_user %></span>
-			</li>
-			<li>
-				<%= link_to 'Logout',  destroy_user_session_path, :method => :delete %>
-			</li>
-			<li>
-				<%= link_to 'Edit account',  edit_user_registration_path %>
-			</li>
-			<% else %>
-			<li>
-				<%= link_to 'Sign in', new_user_session_path %>
-			</li>
-			<li>
-				<%= link_to 'Sign up', new_user_registration_path %>
-			</li>
-			<% end %>
-		</ul>
-		<% if not current_user.nil? %>
-		<!-- Left Nav Section -->
-		<ul class="left">
-			<li class="has-dropdown">
-				<a href="#">Profile</a>
-				<ul class="dropdown">
-					<li>
-						<%= link_to 'Submitted translations', submitted_translations_user_path(current_user.id)%>
-					</li>
-					<li>
-						<%= link_to 'Your Projects',  user_projects_path(current_user.id) %>
-					</li>
-					<li>
-						<%= link_to 'Profile information',  user_path(current_user.id) %>
-					</li>
-				</ul>
-			</li>
-			<li>
-				<span style="color: #fff">Reputation: <%= link_to current_user.reputation,  "#" %></span>
-			</li>
-		</ul>
-		<% end %>
-	</section>
+  <section class="top-bar-section" >
+    <!-- Right Nav Section -->
+    <ul class="right">
+      <% if user_signed_in? %>
+          <li>
+            <%= link_to "Reputation: " + current_user.reputation.to_s, "#" %>
+          </li>
+          <li class="has-dropdown">
+            <a href="#"><%= current_user.name %></a>
+            <ul class="dropdown">
+              <li>
+                <%= link_to 'Submitted translations', submitted_translations_user_path(current_user.id)%>
+              </li>
+              <li>
+                <%= link_to 'Your Projects',  user_projects_path(current_user.id) %>
+              </li>
+              <li>
+                <%= link_to 'Profile information',  user_path(current_user.id) %>
+              </li>
+              <li>
+                <%= link_to 'Edit account',  edit_user_registration_path %>
+              </li>
+              <li>
+                <%= link_to 'Logout',  destroy_user_session_path, :method => :delete %>
+              </li>
+            </ul>
+          </li>
+      <% else %>
+          <li>
+            <%= link_to 'Sign in', new_user_session_path %>
+          </li>
+          <li>
+            <%= link_to 'Sign up', new_user_registration_path %>
+          </li>
+      <% end %>
+    </ul>
+  </section>
 </nav>
