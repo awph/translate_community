@@ -1,12 +1,16 @@
 <div id="translations_<%=item.id%>_<%=language.id%>" >
-  <h4 class="subheader"><%= item.key %></h4>
+  <h4 class="subheader">
+    <%= item.key + " " %>
+    <% first_translation = item.first_translation %>
+    <% unless first_translation.nil? %>
+        <span data-tooltip="" class="has-tip tip-top noradius" title="<%= first_translation.value %>"> <span class="glyphicon glyphicon-bullhorn"></span></span>
+    <% end %>
+  </h4>
   <hr />
   <% @best = true %>
-  <% item.translations_sorted.each do |translation| %>
-      <% if translation.language.id == language.id%>
-          <%= render translation %>
-          <% @best = false %>
-      <% end %>
+  <% item.translations_sorted(language).each do |translation| %>
+      <%= render translation %>
+      <% @best = false %>
   <% end %>
   <div id="button_offer_translation_<%=item.id%>_<%=language.id%>"><%= button_to "Offer new translation", offer_translation_project_path(:item_id => item.id, :language_id => language.id) , :class => "button primary-dark small", :method => :put, remote: true%></div>
 </div>
