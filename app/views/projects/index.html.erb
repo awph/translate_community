@@ -1,5 +1,14 @@
-<h1>Project listing</h1>
-<%= render @projects %>
+<% if params[:user_id].nil? %>
+    <% title = "Projects that need your help" # index %>
+<% else %>
+    <% title = User.find(params[:user_id]).name + " projects" # user %>
+<% end %>
+<h1><%= title %></h1>
+
+<% if @projects.any? %>
+    <%= render @projects %>
+<% else %>
+    <p>No project found for your languages</p>
+<% end %>
 
 <%= button_to "Create new project", new_project_path, :class => "button inverse-dark", :method => :get %>
-
