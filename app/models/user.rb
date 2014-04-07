@@ -13,13 +13,16 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :user_languages
 
+  @@reputation_ratio = 10
+
   def reputation
-    rep = 1
+    rep = 0
     translations = Translation.where(user_id: id)
     translations.each do |translation|
       rep += translation.score
     end
-    rep
+    rep /= @@reputation_ratio
+    rep += 1
   end
 
 end
