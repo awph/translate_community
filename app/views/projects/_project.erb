@@ -8,7 +8,8 @@
     </blockquote>
     <% languages = current_user.languages & project.languages %>
     <% languages.each do |language| %>
-        <div class="radius progress success large-12"><span class="meter" style="width: <%= project.progression(language) * 100 %>%"><%= language.name %></span></div>
+        <strong><%= language.name %></strong>
+        <div class="radius progress large-12"><span class="meter" style="width: <%= project.progression(language) * 100 %>%; text-align: center;"><strong><%= (project.progression(language) * 100).to_i %>%</strong></span></div>
     <% end %>
 <% end %>
-<hr />
+<br />

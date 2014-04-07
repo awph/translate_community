@@ -7,6 +7,7 @@ class Item < ActiveRecord::Base
   def translations_sorted
     sorted = translations.sort_by { |translation| [translation.score, translation.created_at] }
     best = sorted.pop
-    sorted.sort_by(&:created_at).reverse.unshift(best)
+    sorted = sorted.sort_by(&:created_at).reverse.unshift(best) unless best.nil?
+    sorted
   end
 end
