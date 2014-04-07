@@ -1,38 +1,26 @@
+<h2><%= title %></h2>
 <%= form_for(@project) do |f| %>
-    <fieldset style="margin-top: 20px">
-      <legend>Editing project</legend>
-      <% if @project.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(@project.errors.count, "error") %> prohibited this project from being saved:</h2>
-
-            <ul>
-              <% @project.errors.full_messages.each do |msg| %>
-                  <li>
-                    <%= msg %>
-                  </li>
-              <% end %>
-            </ul>
-          </div>
-      <% end %>
+      <%= error_messages! %>
 
       <div class="row">
         <div class="large-12 columns">
           <%= f.label :name %>
           <br>
-          <%= f.text_field :name %>
+          <%= f.text_field :name, :autofocus => true %>
         </div>
       </div>
       <div class="row">
         <div class="large-12 columns">
           <%= f.label :description %>
-          <br>
+          <br />
           <%= f.text_area :description, :class => "small-12.columns" %>
+          <br />
         </div>
       </div>
       <div class="row">
         <div class="large-12 columns">
           <%= f.label :languages %>
-          <br>
+          <br />
           <%= f.collection_select :language_ids,
                                   Language.all,
                                   :id,
@@ -40,16 +28,15 @@
                                   {include_blank: true},
                                   {class: 'chosen-select', :multiple => true}
           %>
+          <br />
+          <br />
         </div>
       </div>
       <div class="row">
-        <div class="large-2 columns">
+        <div class="large-12 columns">
           <%= f.submit :class => "button success-darker small", :method => :get %>
-        </div>
-        <div class="large-10 columns">
-          <%= link_to "Cancel", @project, :class => "button inverse small", :method => :get %>
-          <%= link_to "Destroy", @project, :class => "button alert-dark small", method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to "Delete", @project, :class => "button alert-dark small", method: :delete, data: { confirm: 'Are you sure?' } unless new %>
+          <%= link_to "Cancel", @project, :class => "button inverse small", :method => :get%>
         </div>
       </div>
-    </fieldset>
 <% end %>

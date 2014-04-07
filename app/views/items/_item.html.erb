@@ -3,7 +3,7 @@
   <hr />
   <% @best = true %>
   <% item.translations_sorted.each do |translation| %>
-      <% if translation.language_id == language.id%>
+      <% if translation.language.id == language.id%>
           <%= render translation %>
           <% @best = false %>
       <% end %>
