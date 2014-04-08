@@ -1,11 +1,31 @@
 <div style="margin:10px">
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-  <strong>Reputation:</strong>
-  <%= @user.reputation %>
-</p>
+	<div class="large-5 columns">
+		<img src="http://www.gravatar.com/avatar/<%=Digest::MD5.hexdigest(@user.email.downcase)%>?s=300" />
+		
+			<div style="margin:15px">
+			  	<h1><%= @user.name %></h1>
+				<strong>Reputation:</strong>
+				<%= @user.reputation %>
+			</div>
+			<br />
+			
+			<div class="large-3 columns">
+				<h6>Languages:</h6>
+			</div>
+			<div class="large-9 columns">
+				<%@user.languages.each do |language| %>
+					<h6><%= language.name %></h6>
+				<%end%>
+			</div>
+				
 
-<%= render @user.projects %>
+	</div>
+	<div class="large-7 columns">
+		<h4><%=@user.name%>'s projects</h4>
+		<%= render @user.projects %>
+	</div>
+
+
+
 
 </div>
