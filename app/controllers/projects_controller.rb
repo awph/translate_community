@@ -4,7 +4,7 @@ require 'zip'
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy, :upload_items, :download_android, :download_ios]
   before_filter :authenticate_user!
-  before_filter :access_control, only: [:edit, :destroy, :upload_items, :update, :download_android, :download_ios]
+  before_filter :access_control, only: [:edit, :destroy, :upload_items, :update]
 
   # GET /projects
   def index
