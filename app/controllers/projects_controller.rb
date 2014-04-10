@@ -131,7 +131,10 @@ class ProjectsController < ApplicationController
         translations.each do |key, value|
           unless key == :file or key == :filename
             xml.string_('name' => key) {
-              xml.text(value[:value])
+              value = value[:value].gsub(/'/) {|s| "\\'"}
+              i = 0
+              value = value.gsub(/%[^% ]{1}/) {|s| "%" + (i+=1).to_s + "$" + s.split(//).last}
+              xml.text(value)
             }
           end
         end
