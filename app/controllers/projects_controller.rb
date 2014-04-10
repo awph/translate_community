@@ -163,7 +163,7 @@ class ProjectsController < ApplicationController
     # Content
     translations.each do |key, value|
       unless key == :file or key == :filename
-          file.puts "\"" + key + "\" = \"" + value[:value] + "\";"
+          file.puts "\"" + key.gsub(/[^\\]"|^"/) { |s| (s.size > 1 ? s.first : "") + "\\\""} + "\" = \"" + value[:value].gsub(/[^\\]"|^"/) {|s| (s.size > 1 ? s.first : "") + "\\\""} + "\";"
       end
     end
 
