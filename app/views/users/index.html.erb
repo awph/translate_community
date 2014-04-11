@@ -1,22 +1,16 @@
-<h1>Listing users</h1>
+<h1>Leaderboard</h1>
 
 <table>
   <thead>
-    <tr>
-      <th>Name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
+  <tr>
+    <th></th>
+    <th>Name</th>
+    <th>Translations</th>
+    <th>Score</th>
+  </tr>
   </thead>
-
   <tbody>
-    <% @users.each do |user| %>
-      <tr>
-        <td><%= user.name %></td>
-        <td><%= link_to 'Show', user %></td>
-      </tr>
-    <% end %>
+  <%= render @users %>
   </tbody>
 </table>
 

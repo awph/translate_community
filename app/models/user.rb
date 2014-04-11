@@ -16,13 +16,18 @@ class User < ActiveRecord::Base
   @@reputation_ratio = 10
 
   def reputation
-    rep = 0
-    translations = Translation.where(user_id: id)
-    translations.each do |translation|
-      rep += translation.score(true)
-    end
+    rep = total_score
     rep /= @@reputation_ratio
     rep += 1
+  end
+
+  def total_score
+    score = 0
+    translations = Translation.where(user_id: id)
+    translations.each do |translation|
+      score += translation.score(true)
+    end
+    score
   end
 
 end

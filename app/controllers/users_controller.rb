@@ -5,6 +5,7 @@ class UsersController < ApplicationController
   # GET /users
   def index
     @users = User.all
+    @users = @users.sort_by { |user| -user.total_score }
   end
 
   # GET /users/1

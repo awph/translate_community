@@ -15,7 +15,7 @@
       <tr>
         <td><%= translation.language.name %></td>
         <td><%= translation.value %></td>
-        <td><%= translation.score %></td>
+        <td><%= translation.score(true) %></td>
         <td><%= link_to 'Show', '/projects/' + translation.item.project.id.to_s + "#translation_" + translation.id.to_s, "data-no-turbolink" => "true" %></td>
       </tr>
     <% end %>

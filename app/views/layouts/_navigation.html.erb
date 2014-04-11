@@ -17,6 +17,9 @@
             <a href="#"><%= current_user.name %></a>
             <ul class="dropdown">
               <li>
+                <%= link_to 'Leaderboard', users_path%>
+              </li>
+              <li>
                 <%= link_to 'Submitted translations', submitted_translations_user_path(current_user.id)%>
               </li>
               <li>
