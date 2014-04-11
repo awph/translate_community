@@ -1,7 +1,7 @@
 <% if params[:user_id].nil? %>
     <% title = "Projects that need your help" # index %>
 <% else %>
-    <% title = User.find(params[:user_id]).name + " projects" # user %>
+    <% title = User.find(params[:user_id]).name + "'s projects" # user %>
 <% end %>
 <h1><%= title %></h1>
 
