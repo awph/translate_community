@@ -93,7 +93,7 @@ class ProjectsController < ApplicationController
     items = Hash.new
     strings.each do |string|
       name = string.attributes['name'].value
-      value = string.children.text
+      value = string.children.text.gsub(/\\'/) {|s| "'"}
       items[name] = value
     end
     items
