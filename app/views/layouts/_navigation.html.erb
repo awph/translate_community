@@ -11,7 +11,7 @@
     <ul class="right">
       <% if user_signed_in? %>
           <li>
-            <%= link_to "Reputation: " + current_user.reputation.to_s, "#" %>
+            <%= link_to "Reputation: " + current_user.reputation.to_s, user_path(current_user.id) %>
           </li>
           <li class="has-dropdown">
             <a href="#"><%= current_user.name %></a>
