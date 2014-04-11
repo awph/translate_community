@@ -8,12 +8,10 @@ class Translation < ActiveRecord::Base
   validates :item_id, :language_id, :user_id, :value, presence: true
 
 
-  def score
-    score = 0
+  def score(from_reputation = false)
+    score = from_reputation ? 0 : user.reputation
     UserTranslationsScore.where(translation_id: id).each do |vote|
-      reputation = User.find(vote.user_id).reputation
-      reputation *= -1 unless vote.up
-      score += reputation
+      score += vote.up ? 1 : -1
     end
     score
   end
