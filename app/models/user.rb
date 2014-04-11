@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
     rep = 0
     translations = Translation.where(user_id: id)
     translations.each do |translation|
-      rep += translation.score
+      rep += translation.score(true)
     end
     rep /= @@reputation_ratio
     rep += 1
