@@ -6,7 +6,7 @@
         <%= project.user.name %>
       </cite>
     </blockquote>
-    <% languages = current_user.languages & project.languages %>
+    <% languages = current_user != project.user ? current_user.languages & project.languages : project.languages %>
     <% languages.each do |language| %>
         <strong><%= language.name %></strong>
         <div class="radius progress large-12"><span class="meter" style="width: <%= project.progression(language) * 100 %>%; text-align: center;"><strong><%= (project.progression(language) * 100).to_i %>%</strong></span></div>
