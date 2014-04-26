@@ -6,3 +6,7 @@ Il sera également possible d’exporter les traductions aux formats voulu pour 
 
 
 Ruby on Rails project, Bsc 6 HE-Arc 2013-2014
+
+## License
+
+This code is distributed under the terms and conditions of the [MIT license](LICENSE.md).
